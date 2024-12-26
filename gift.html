@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Card</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #917404bd, #9d4434);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #454545;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #0b0b0b;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Wishing Card Container */
+        .card {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            background: linear-gradient(135deg, #0472a9, #3498DB);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            color: rgb(11, 11, 11);
+            text-align: center;
+            overflow: hidden;
+            transform: scale(0);
+            animation: cardEntrance 1s ease-out forwards;
+        }
+
+        /* Picture in Card */
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Message inside card */
+        .message {
+            font-size: 1.5em;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeInMessage 2s ease-in-out forwards;
+        }
+
+        /* Balloons Animation */
+        .balloon {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            width: 40px;
+            height: 60px;
+            background-color: #350303;
+            border-radius: 50%;
+            animation: balloonAnimation 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .balloon:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .balloon:nth-child(2) {
+            left: 30%;
+            animation-delay: 0.5s;
+        }
+
+        .balloon:nth-child(3) {
+            left: 50%;
+            animation-delay: 1s;
+        }
+
+        .balloon:nth-child(4) {
+            left: 70%;
+            animation-delay: 1.5s;
+        }
+
+        .balloon:nth-child(5) {
+            left: 90%;
+            animation-delay: 2s;
+        }
+
+        /* Balloon Animation */
+        @keyframes balloonAnimation {
+            0% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(100px);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+        }
+
+        /* Card Entrance Animation */
+        @keyframes cardEntrance {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Message Fade-in Animation */
+        @keyframes fadeInMessage {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                width: 300px;
+                height: 400px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .message {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌟 Wishing You a Very Happy New Year! 🎉</h1>
+
+    <div class="card" id="newYearCard">
+        <img src="all.jpg" alt="Your Picture"> <!-- Replace with your image -->
+        <div class="message" id="message">
+            <p>Wishing you a year full of happiness, success, and love! 🥳</p>
+           
+        </div>
+    </div>
+
+    <div class="balloon" id="balloon1"></div>
+    <div class="balloon" id="balloon2"></div>
+    <div class="balloon" id="balloon3"></div>
+    <div class="balloon" id="balloon4"></div>
+    <div class="balloon" id="balloon5"></div>
+    <div class="balloon" id="balloon6"></div>
+    <div class="balloon" id="balloon7"></div>
+    <div class="balloon" id="balloon8"></div>
+    <div class="balloon" id="balloon5"></div>
+    <div class="balloon" id="balloon5"></div>
+    <div class="balloon" id="balloon5"></div>
+    <script>
+        // Card animation triggers on page load
+        window.onload = function() {
+            document.getElementById("newYearCard").style.transform = 'scale(1)';
+            setTimeout(function() {
+                document.getElementById("message").style.opacity = '1';
+            }, 1000);
+        };
+    </script>
+
+</body>
+</html>

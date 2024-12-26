@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2024</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="new-year-animation">🎉 Happy New Year 2024! 🎉</h1>
+            <p class="subtitle">Wishing you a fantastic year ahead from Ali Hussain, Mubeen, Wasi, Hammad, and Hamid!</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Countdown Timer Section -->
+        <section class="countdown">
+            <div class="container">
+                <h2>Countdown to 2024</h2>
+                <div id="timer">
+                    <span id="days">00</span> Days :
+                    <span id="hours">00</span> Hours :
+                    <span id="minutes">00</span> Minutes :
+                    <span id="seconds">00</span> Seconds
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Wishes Section -->
+        <section class="friends">
+            <div class="container">
+                <h2>Our Wishes</h2>
+                <div class="friend-cards">
+                    <div class="card">
+                        <img src="ali.jpg" alt="Ali Hussain">
+                        <p>Ali Hussain: "Wishing you joy and success in 2024!"</p>
+                    </div>
+                    <div class="card">
+                        <img src="mubeen.jpg" alt="Mubeen">
+                        <p>Mubeen: "Cheers to a wonderful New Year!"</p>
+                    </div>
+                    <div class="card">
+                        <img src="wasi.jpg" alt="Wasi">
+                        <p>Wasi: "May this year bring happiness to all!"</p>
+                    </div>
+                    <div class="card">
+                        <img src="hammad.jpg" alt="Hammad">
+                        <p>Hammad: "Let’s make this year unforgettable!"</p>
+                    </div>
+                    <div class="card">
+                        <img src="hamid.jpg" alt="Hamid">
+                        <p>Hamid: "Happy New Year to everyone!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        
+
+        <!-- 3D Globe Section -->
+        
+
+        <!-- Fireworks Animation -->
+        
+
+        <!-- Gift Page Section -->
+        <section class="gift-page-link">
+            <div class="container">
+                <h2>Surprise Awaits!</h2>
+                <a href="gift.html" class="btn">🎁 Visit Gift Page</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Happy New Year Website | Designed by Ali Hussain & Team</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fireworks Animation JavaScript
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const fireworks = [];
+
+        class Firework {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.particles = [];
+                for (let i = 0; i < 50; i++) {
+                    this.particles.push(new Particle(this.x, this.y, this.color));
+                }
+            }
+
+            update() {
+                this.particles.forEach(particle => particle.update());
+            }
+
+            draw() {
+                this.particles.forEach(particle => particle.draw());
+            }
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 6 - 3;
+                this.speedY = Math.random() * 6 - 3;
+                this.opacity = 1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity -= 0.02;
+            }
+
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function animateFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((firework, index) => {
+                firework.update();
+                firework.draw();
+                if (firework.particles[0].opacity <= 0) fireworks.splice(index, 1);
+            });
+            requestAnimationFrame(animateFireworks);
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            fireworks.push(new Firework(x, y, color));
+        });
+
+        animateFireworks();
+
+        // 3D Globe with Three.js
+        const globeContainer = document.getElementById('threejs-globe');
+        const globeScene = new THREE.Scene();
+        const globeCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const globeRenderer = new THREE.WebGLRenderer();
+        globeRenderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
+        globeContainer.appendChild(globeRenderer.domElement);
+
+        const geometry = new THREE.SphereGeometry(5, 32, 32);
+        const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
+        const sphere = new THREE.Mesh(geometry, material);
+        globeScene.add(sphere);
+
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(10, 10, 10);
+        globeScene.add(light);
+
+        globeCamera.position.z = 10;
+
+        function animateGlobe() {
+            requestAnimationFrame(animateGlobe);
+            sphere.rotation.y += 0.01;
+            globeRenderer.render(globeScene, globeCamera);
+        }
+
+        animateGlobe();
+    </script>
+</body>
+</html>
